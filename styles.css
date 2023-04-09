@@ -1,0 +1,56 @@
+body {
+  background-color: black;
+}
+
+#logo {
+  height: 50px;
+  width: auto;
+  margin-top: -5px;
+  margin-left: 13px;
+}
+
+#nav {
+  background-color: #14130a;
+}
+
+#menu {
+  margin-left: 50px;
+  color: white;
+}
+
+input {
+  margin-left: 15px;
+  height: 30px;
+  width: 500px;
+}
+
+.vl {
+  border-left: 1px solid grey;
+  margin-left: 10px;
+}
+
+.nav-el {
+  color: white;
+  margin-left: 40px;
+  font-weight: bold;
+}
+
+#search-results {
+  font-size: 16px;
+  list-style: none;
+  width: 500px;
+  height: 72px;
+  margin-left: 230px;
+}
+
+#search-results div {
+  background-color: white;
+  height: 60px;
+  width: 500px;
+  border: 1px solid grey;
+}
+
+.result img {
+  height: 60px;
+  width: 40px;
+}

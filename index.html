@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMDB</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="shortcut icon" href="iconn.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="nav">
+    <img src="logo.jpg" alt="" id="logo">
+    <span class="glyphicon glyphicon-menu-hamburger" id="menu"></span>
+    <span style="margin-left:7px;color:white;">MENU</span>
+    <input type="text" id="searchbutton" oninput="searchnow()" placeholder="Search IMDB">
+    <button type="submit" name="button">Search</button>
+    <img src="prologo.jpg" alt="" id="logo" style="height: 30px;width: auto; margin-left: 13px;">
+    <span class="vl"></span>
+    <i class="material-icons" style="margin-left:15px;color:white;font-size:20px;margin-top:10px;padding-bottom:0px">add_to_photos</i>
+    <span class="nav-el" style="margin-left:3px;">Watchlist</span>
+    <span class="nav-el">Sign In</span>
+    <span class="nav-el">EN</span>
+  </div>
+  <div id="search-results"></div>
+  <script type="text/javascript">
+    function searchnow() {
+      const movies = [];
+      let parentElement = document.getElementById("search-results");
+
+      // Loop through all child li elements and remove them
+      while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild);
+      }
+      var movie = document.getElementById('searchbutton').value;
+      let OMDBapi_URL = "https://www.omdbapi.com/?apikey=77322d39&s=" + movie;
+      fetch(OMDBapi_URL)
+        .then((response) => response.json())
+        .then((data) => {
+          len = data.Search.length;
+          for (let i = 0; i < len; i++) {
+            if (data.Search[i].Poster != 'N/A') {
+              movies.push({
+                Title: data.Search[i].Title,
+                Year: data.Search[i].Year,
+                Poster: data.Search[i].Poster
+              })
+            }
+          }
+          console.log(movies);
+          l = movies.length;
+          for (let a = 0; a < l; a++) {
+            const list = document.createElement("div");
+            const text = document.createElement("span");
+            list.setAttribute("class", "result");
+            const image = document.createElement("img");
+            image.setAttribute("src", movies[a].Poster);
+            list.appendChild(image);
+            text.innerText = movies[a].Title+"-"+movies[a].Year;
+            list.appendChild(text);
+            // list.setAttribute("class", "result");
+            document.getElementById('search-results').appendChild(list);
+          }
+        })
+    }
+  </script>
+</body>
+
+</html>
